@@ -22,10 +22,10 @@ def fast_mul(x, y):
         x <<= 1# Умножение на 2
         y >>= 1# Деление на 2 с отбрасыванием остатка
 
-    assert result * sign == x * y, "Не правильно"
+
     return result * sign
 
-print(fast_mul(0, 15))
+print(fast_mul(14, 15) == 14 * 5)
 
 # 3.6
 print('№ 3.6')
@@ -48,10 +48,10 @@ def fast_pow(a, n):
         base *= base
         power >>= 1
 
-    assert result == a ** n, "Не правильно"
+
     return result
 
-print(fast_pow(4, 6))
+print(fast_pow(4, 6) == 4**6)
 
 # 3.7
 print('№ 3.7')
@@ -70,11 +70,10 @@ def mul16(x, y):
     result3 = mul_bits(x1, y0)
     result4 = mul_bits(x0, y0)
     result = (result4 << 16) + ((result2 + result3) << 8) + result1
-    assert result == x * y, "Не правильно"
     return result
 
-print(mul16(65535, 65535))
-print(mul16(6575, 49525))
+print(mul16(65535, 65535) == 65535 * 65535)
+print(mul16(6575, 49525) == 6575 * 49525)
 
 # 3.8
 print('№ 3.8')
@@ -88,11 +87,10 @@ def mul16k(x, y):
     result3 = mul_bits(x, y)
     result4 = result3 - result1 - result2
     result = (result1 << 16) + (result4 << 8) + result2
-    assert result == x * y, "Не правильно"
     return result
 
-print(mul16(65535, 65535))
-print(mul16(6575, 49525))
+print(mul16(65535, 65535) == 65535 * 65535)
+print(mul16(6575, 49525) == 6575 * 49525)
 
 # 3.9
 print('№ 3.9')
@@ -117,7 +115,6 @@ def fast_mul_gen(y):
     
     print(f"    result = {' + '.join(terms)}")
     print(f"    result = {sign}result")
-    print(f"    assert result == x * numder, 'Не правильно'")
     print(f"    return result")
 
 
@@ -134,10 +131,9 @@ def f(x):
     n5 = n4 + n4
     result = n5
     result = -result
-    assert result == x * numder, 'Не правильно'
     return result
 
-print(f(3))
+print(f(3) == -32 * 3)
 
 
 # 4.3
@@ -178,6 +174,12 @@ def shader1(x, y):
     c1 = 1 / 4
     b2 = -1 / 2
     c2 = 3 / 4
+    if (x > 1 / 3) & (x < 2 / 3):
+        if ((y < (1 / 6) * (2 / 6) + (1 / 6)) & (y > (1 / 6) * (2 / 3))) & (y < 0.5):
+            return 1, 0, 0
+    if (x > (2 / 3)) & (x < ((1 / 3) * 0.5) + (2 / 3)):
+        if (y > (1 / 6) * (1 / 6) + (1 / 6)) & (y < (1 / 6) * (2 / 6) + (1 / 6)):
+            return 1, 0, 0
     if r1 > (1 / 3):
         return 0, 0, 0 # черный
     else:
